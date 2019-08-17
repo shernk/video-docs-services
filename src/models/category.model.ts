@@ -1,0 +1,7 @@
+import { model, Schema } from "mongoose";
+
+const CategorySchema = new Schema({
+  category: { type: String, requried: true, max: 50 }
+});
+
+export default model("Category", CategorySchema);

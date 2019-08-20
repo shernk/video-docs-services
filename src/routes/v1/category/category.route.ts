@@ -5,10 +5,12 @@ const router = Router();
 
 const categoryController: CategoryController = new CategoryController();
 
-router.get("/", categoryController.getAllCategories);
-router.get("/:id", categoryController.getCategoryById);
-router.post("/", categoryController.addCategory);
-router.put("/:id", categoryController.updateCategoryById);
-router.delete("/", categoryController.deleteCategory);
+router.get("/", (req, res) => categoryController.getAllCategories(req, res));
+router.get("/:id", (req, res) => categoryController.getCategoryById(req, res));
+router.post("/", (req, res) => categoryController.addCategory(req, res));
+router.put("/:id", (req, res) =>
+  categoryController.updateCategoryById(req, res)
+);
+router.delete("/", (req, res) => categoryController.deleteCategory(req, res));
 
 export default router;

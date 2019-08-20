@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import Category from "../../../models/category.model";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
 import Topic from "../../../models/topic.model";
 

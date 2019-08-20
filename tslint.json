@@ -12,7 +12,8 @@
     "arrow-parens": false,
     "object-literal-sort-keys": false,
     "no-trailing-whitespace": false,
-    "no-shadowed-variable": false
+    "no-shadowed-variable": false,
+    "comment-format": false
   },
   "rulesDirectory": []
 }

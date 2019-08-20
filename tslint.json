@@ -9,7 +9,10 @@
     "trailing-comma": false,
     "import-spacing": false,
     "no-consecutive-blank-lines": false,
-    "arrow-parens": false
+    "arrow-parens": false,
+    "object-literal-sort-keys": false,
+    "no-trailing-whitespace": false,
+    "no-shadowed-variable": false
   },
   "rulesDirectory": []
 }

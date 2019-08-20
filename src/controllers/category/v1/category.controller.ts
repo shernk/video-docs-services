@@ -3,64 +3,56 @@ import Category from "../../../models/category.model";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
 
 export class CategoryController {
-  public getAllCategories(req: Request, res: Response): void {
-    Category.find({}, (err, categories) => {
-      if (err) {
-        res.send(err);
-      }
-
-      res.json(categories);
-    });
+  public async getAllCategories(req: Request, res: Response): Promise<void> {
+    try {
+      const categories = await Category.find();
+      res.send(categories);
+    } catch (err) {
+      res.send(err);
+    }
   }
 
-  public getCategoryById(req: Request, res: Response): void {
-    Category.findById(req.params.id, (err, category) => {
-      if (err) {
-        res.status(404).send(err);
-      }
-
+  public async getCategoryById(req: Request, res: Response): Promise<void> {
+    try {
+      const category = await Category.findById(req.params.id);
       res.send(category);
-    });
+    } catch (err) {
+      res.send(err);
+    }
   }
 
-  public addNewCategory(req: Request, res: Response): void {
+  public async addCategory(req: Request, res: Response): Promise<void> {
     const newCategory = new Category(req.body);
-
-    newCategory.save((err, category) => {
-      if (err) {
-        res.send(err);
-      }
-
-      res.json(category);
-    });
+    try {
+      const category = await newCategory.save();
+      res.send(category);
+    } catch (err) {
+      res.send(err);
+    }
   }
 
-  public deleteCategory(req: Request, res: Response): void {
-    Category.deleteOne({ _id: req.body._id }, (err: any) => {
-      if (err) {
-        res.status(404).send(err);
-      }
-
+  public async deleteCategory(req: Request, res: Response): Promise<void> {
+    try {
+      await Category.deleteOne({ _id: req.body._id });
       const successfulDetete = new DeleteResponse({
         message: `Successfully Deleted Category`,
         status: 200
       });
       res.status(200).send(successfulDetete);
-    });
+    } catch (err) {
+      res.status(404).send(err);
+    }
   }
 
-  public updateCategoryById(req: Request, res: Response): void {
-    Category.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-      (err, category) => {
-        if (err) {
-          res.status(404).send(err);
-        }
-
-        res.send(category);
-      }
-    );
+  public async updateCategoryById(req: Request, res: Response): Promise<void> {
+    const { params, body } = req;
+    try {
+      const category = await Category.findByIdAndUpdate(params.id, body, {
+        new: true
+      });
+      res.send(category);
+    } catch (err) {
+      res.status(404).send(err);
+    }
   }
 }

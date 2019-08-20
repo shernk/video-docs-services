@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 class App {
   public app: express.Application;
-  public mongoUrl: string = "mongodb://localhost:27017";
+  public mongoUrl: string = "mongodb://localhost:27017/admin";
 
   constructor() {
     this.app = express();
@@ -13,13 +13,17 @@ class App {
   }
 
   private config(): void {
-    this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    // this.app.use(bodyParser.json());
+    // this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(express.json());
   }
 
   private mongoSetup() {
     (mongoose as any).Promise = global.Promise;
-    mongoose.connect(this.mongoUrl, { useNewUrlParser: false });
+    mongoose.set("useNewUrlParser", true);
+    mongoose.set("useFindAndModify", false);
+    mongoose.set("useCreateIndex", true);
+    mongoose.connect(this.mongoUrl);
   }
 }
 

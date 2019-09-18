@@ -5,7 +5,8 @@ import mongoose from "mongoose";
 
 class App {
   public app: express.Application;
-  public mongoUrl: string = "mongodb://localhost:27017/admin";
+  public mongoUrl: string = 
+    process.env.MONGODB_URI || "mongodb://localhost/admin";
 
   constructor() {
     this.app = express();
@@ -30,7 +31,7 @@ class App {
   private corsSetup() {
     const allowedOrigins: string[] = [
       "https://www.videodevdocs.com",
-      "http://localhost:3000"
+      "http://localhost:4200"
     ];
 
     const options = {
@@ -38,11 +39,14 @@ class App {
         if (!origin) {
           return callback(null, true);
         }
+
         if (allowedOrigins.indexOf(origin) === -1) {
           const msg = `The CORS policy for this site does not allow access from the specified Origin`;
 
           return callback(new Error(msg), false);
         }
+
+        return callback(null, true);
       }
     };
 

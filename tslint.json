@@ -13,7 +13,8 @@
     "object-literal-sort-keys": false,
     "no-trailing-whitespace": false,
     "no-shadowed-variable": false,
-    "comment-format": false
+    "comment-format": false,
+    "max-line-length": false
   },
   "rulesDirectory": []
 }

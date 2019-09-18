@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import Category from "../../../models/category.model";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
 import { Playlist } from "./../../../models/category/playlist.model";
+import { BOOKS } from "./../../../models/data-sets/book.data";
+import { COURSE } from "./../../../models/data-sets/course.data";
 import { VideoController } from "./../../video/v1/video.controller";
 
 export class CategoryController {
@@ -22,11 +24,15 @@ export class CategoryController {
 
   public async getCategoryById(req: Request, res: Response): Promise<void> {
     try {
-      const category = await Category.findById(req.params.id);
+      const category = await Category.findOne({ simpleId: req.params.id });
       const video = await this.videoController.getPlayListById(
         category.playlistId
       );
+
       category.playlist = new Playlist(video);
+      category.books = BOOKS[category.simpleId];
+      category.courses = COURSE[category.simpleId];
+
       res.send(category);
     } catch (err) {
       res.send(err);

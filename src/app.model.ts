@@ -39,6 +39,11 @@ class App {
   private corsSetup() {
     const allowedOrigins: string[] = [
       "https://www.videodevdocs.com",
+
+      /*
+       ! Added localhost
+       * Fixed CORS policy: fetch at https://video-docs-service.herokuapp.com/api/v1/category from origin http://localhost: 4200
+       */
       "http://localhost:4200"
     ];
 

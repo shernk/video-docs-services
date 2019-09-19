@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "nodemon server --exec babel-node --presets es2015,stage-2",
     "heroku-postbuild": "cd react-ui/ && npm install && npm install    --only=dev --no-shrinkwrap && npm run build",
-    "start": "node run serve",
+    "start": "npm run serve",
     "build": "tsc",
     "postinstall": "npm run build-ts",
     "build-ts": "tsc",

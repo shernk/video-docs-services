@@ -24,7 +24,7 @@ export class CategoryController {
 
   public async getCategoryById(req: Request, res: Response): Promise<void> {
     try {
-      const category = await Category.findOne({ simpleId: req.params.id });
+      const category = await Category.findOne({ simpleId: req.params });
       const video = await this.videoController.getPlayListById(
         category.playlistId
       );
@@ -65,7 +65,7 @@ export class CategoryController {
   public async updateCategoryById(req: Request, res: Response): Promise<void> {
     const { params, body } = req;
     try {
-      const category = await Category.findByIdAndUpdate(params.id, body, {
+      const category = await Category.findByIdAndUpdate(params, body, {
         new: true
       });
       res.send(category);

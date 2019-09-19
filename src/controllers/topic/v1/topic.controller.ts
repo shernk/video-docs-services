@@ -14,7 +14,7 @@ export class TopicController {
 
   public async getTopicById(req: Request, res: Response): Promise<void> {
     try {
-      const topic = await Topic.findById(req.params.id);
+      const topic = await Topic.findById(req.params);
       res.send(topic);
     } catch (err) {
       res.status(404).send(err);
@@ -26,7 +26,7 @@ export class TopicController {
     res: Response
   ): Promise<void> {
     try {
-      const topic = await Topic.find({ categoryId: req.params.id });
+      const topic = await Topic.find({ categoryId: req.params });
       res.send(topic);
     } catch (err) {
       res.status(404).send(err);
@@ -58,7 +58,7 @@ export class TopicController {
 
   public async deleteTopicByCategoryId(req: Request, res: Response): Promise<void> {
     try {
-      await Topic.deleteOne({ categoryId: req.params.id });
+      await Topic.deleteOne({ categoryId: req.params });
       const successfulDetete = new DeleteResponse({
         message: `Successfully Deleted Topic`,
         status: 200
@@ -72,7 +72,7 @@ export class TopicController {
   public async updateTopicById(req: Request, res: Response): Promise<void> {
     const { params, body } = req;
     try {
-      const topic = await Topic.findByIdAndUpdate(params.id, body, {
+      const topic = await Topic.findByIdAndUpdate(params, body, {
         new: true
       });
       res.send(topic);

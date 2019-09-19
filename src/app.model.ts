@@ -1,11 +1,13 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import expressRateLimit from "express-rate-limit";
+import helmet from "helmet";
 import mongoose from "mongoose";
 
 class App {
   public app: express.Application;
-  public mongoUrl: string = 
+  public mongoUrl: string =
     process.env.MONGODB_URI || "mongodb://localhost/admin";
 
   constructor() {
@@ -16,7 +18,13 @@ class App {
   }
 
   private config(): void {
+    const limiter = new expressRateLimit({
+      max: 100,
+      windowMs: 30 * 60 * 50
+    });
+    this.app.use(limiter);
     this.app.use(express.json());
+    this.app.use(helmet());
     dotenv.config();
   }
 

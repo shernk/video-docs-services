@@ -1,6 +1,16 @@
 import app from "./app.model";
 import V1Routes from "./routes/v1/v1.route";
 
+// version routes
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 // defines version routes
 app.use("/api/v1", V1Routes);
 

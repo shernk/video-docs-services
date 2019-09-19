@@ -7,9 +7,9 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node build/index.js",
+    "start": "node run serve",
     "build": "tsc",
-    "postinstall": "npm run build",
+    "postinstall": "npm run build-ts",
     "build-ts": "tsc",
     "serve": "node dist/server.js",
     "watch-node": "nodemon dist/server.js",

@@ -4,6 +4,8 @@ import express from "express";
 import expressRateLimit from "express-rate-limit";
 import helmet from "helmet";
 import mongoose from "mongoose";
+import { ApiKeys } from "./models/enums/api-keys.enum";
+import { ErrorResponse } from "./models/responses/error-res.model";
 
 class App {
   public app: express.Application;
@@ -15,6 +17,7 @@ class App {
     this.config();
     this.mongoSetup();
     this.corsSetup();
+    this.routeGuardSetup();
   }
 
   private config(): void {
@@ -28,7 +31,7 @@ class App {
     dotenv.config();
   }
 
-  private mongoSetup() {
+  private mongoSetup(): void {
     (mongoose as any).Promise = global.Promise;
     mongoose.set("useNewUrlParser", true);
     mongoose.set("useFindAndModify", false);
@@ -36,11 +39,13 @@ class App {
     mongoose.connect(this.mongoUrl);
   }
 
-  private corsSetup() {
+  private corsSetup(): void {
     const allowedOrigins: string[] = [
       "https://www.videodevdocs.com",
 
       /*
+        * Eps30
+        * Time: 25:30
        ! Added localhost
        * Fixed CORS policy: fetch at https://video-docs-service.herokuapp.com/api/v1/category from origin http://localhost: 4200
        */
@@ -64,6 +69,28 @@ class App {
     };
 
     this.app.use(cors(options));
+  }
+
+  /*
+  * Eps30
+  * Time: 53:00
+  ! Cannot update by API_KEY
+  */
+  private routeGuardSetup(): void {
+    // Get API_KEY
+    this.app.use("*", (req, res, next) => {
+      if (req.method !== "GET") {
+        const apiKey = req.query.key;
+
+        if (apiKey === ApiKeys.Admin) {
+          next();
+        } else {
+          res.status(401).send(new ErrorResponse({ message: "Invalid API KEY" }));
+        }
+      }
+
+      next();
+    });
   }
 }
 

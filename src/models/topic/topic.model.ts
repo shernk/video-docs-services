@@ -1,4 +1,6 @@
+import { ObjectID } from "bson";
 import { model, Schema } from "mongoose";
+import { ITopic } from "./topic.interface";
 
 const TopicSchema = new Schema({
   categoryId: { type: String, requried: true },
@@ -6,4 +8,4 @@ const TopicSchema = new Schema({
   description: { type: String, maxlength: 200, default: "" }
 });
 
-export default model("Topic", TopicSchema);
+export default model<ITopic>("Topic", TopicSchema);

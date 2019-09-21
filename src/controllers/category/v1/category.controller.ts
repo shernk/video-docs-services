@@ -1,9 +1,12 @@
 import { Request, Response } from "express";
-import Category from "../../../models/category.model";
+import Category from "../../../models/category/category.model";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
+import Topic from "../../../models/topic/topic.model";
+import { Book } from "./../../../models/category/book.interface";
+import { Course } from "./../../../models/category/course.interface";
 import { Playlist } from "./../../../models/category/playlist.model";
 import { BOOKS } from "./../../../models/data-sets/book.data";
-import { COURSE } from "./../../../models/data-sets/course.data";
+import { COURSES } from "./../../../models/data-sets/course.data";
 import { VideoController } from "./../../video/v1/video.controller";
 
 export class CategoryController {
@@ -22,16 +25,28 @@ export class CategoryController {
     }
   }
 
+  public async getCategoryTopics(req: Request, res: Response): Promise<void> {
+    try {
+      const category = await Category.findOne({ simpleId: req.params });
+      const topics = await Topic.find({ categoryId: category._id });
+
+      category.topics = topics;
+      category.books = this.getBooks(category.simpleId);
+      category.courses = this.getCourses(category.simpleId);
+
+      res.send(category);
+    } catch (err) {
+      res.send(err);
+    }
+  }
+
   public async getCategoryById(req: Request, res: Response): Promise<void> {
     try {
       const category = await Category.findOne({ simpleId: req.params });
-      const video = await this.videoController.getPlayListById(
-        category.playlistId
-      );
 
-      category.playlist = new Playlist(video);
-      category.books = BOOKS[category.simpleId];
-      category.courses = COURSE[category.simpleId];
+      category.playlist = await this.getPlayList(category.playlistId);
+      category.books = this.getBooks(category.simpleId);
+      category.courses = this.getCourses(category.simpleId);
 
       res.send(category);
     } catch (err) {
@@ -72,5 +87,19 @@ export class CategoryController {
     } catch (err) {
       res.status(404).send(err);
     }
+  }
+
+  private getBooks(simpleId: string): Book[] {
+    return BOOKS[simpleId];
+  }
+
+  private getCourses(simpleId: string): Course[] {
+    return COURSES[simpleId];
+  }
+
+  private async getPlayList(playlistId: string): Promise<Playlist> {
+    const video = await this.videoController.getPlayListById(playlistId);
+
+    return new Playlist(video);
   }
 }

@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { ICategory } from "./category/category.interface";
+import { ICategory } from "./category.interface";
 
 const CategorySchema = new Schema({
   simpleId: { type: Object, required: true, max: 20, min: 2 },
@@ -13,10 +13,11 @@ const CategorySchema = new Schema({
    */
   playlist: { type: Object, required: false },
 
-  playlistId: { type: String, required: true },
+  playlistId: { type: String, required: true, default: [] },
   description: { type: String, maxlength: 200, default: "" },
   books: { type: Array, required: false, default: [] },
-  courses: { type: Array, required: false, default: [] }
+  courses: { type: Array, required: false, default: [] },
+  topics: [{ type: Object, required: false, default: [] }]
 });
 
 export default model<ICategory>("Category", CategorySchema);

@@ -7,6 +7,9 @@ const categoryController: CategoryController = new CategoryController();
 
 router.get("/", (req, res) => categoryController.getAllCategories(req, res));
 router.get("/:id", (req, res) => categoryController.getCategoryById(req, res));
+router.get("/:id/topics", (req, res) =>
+  categoryController.getCategoryTopics(req, res)
+);
 router.post("/", (req, res) => categoryController.addCategory(req, res));
 router.put("/:id", (req, res) =>
   categoryController.updateCategoryById(req, res)

@@ -1,6 +1,6 @@
 import { Course } from "./../category/course.interface";
 
-export const COURSE: { [key: string]: Course[] } = {
+export const COURSES: { [key: string]: Course[] } = {
   javascript: [
     {
       imageUrl: "https://via.placeholder.com/640x360",

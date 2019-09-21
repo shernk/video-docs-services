@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
-import Topic from "../../../models/topic.model";
+import Topic from "../../../models/topic/topic.model";
 
 export class TopicController {
   public async getAllTopic(req: Request, res: Response): Promise<void> {

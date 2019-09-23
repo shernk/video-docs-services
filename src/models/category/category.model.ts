@@ -9,7 +9,7 @@ const CategorySchema = new Schema({
    TODO: watch again
    * Ep29
    * Time: 29:21
-   ! show playlist's item[{videoID, desciption, title, thumnailUrl}]
+   ! didnt display playlist's item[{videoID, desciption, title, thumnailUrl}]
    */
   playlist: { type: Object, required: false },
 

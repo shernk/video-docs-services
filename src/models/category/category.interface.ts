@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
+import { Book } from "../book/book.interface";
+import { Course } from "../course/course.interface";
+import { Playlist } from '../playlist/playlist.model';
 import { ITopic } from "../topic/topic.interface";
-import { Book } from './book.interface';
-import { Course } from "./course.interface";
-import { Playlist } from './playlist.model';
 
 export interface ICategory extends mongoose.Document {
   description: string;

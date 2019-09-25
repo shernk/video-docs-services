@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Book } from "./../../../models/category/book.interface";
-import { Course } from "./../../../models/category/course.interface";
+import { Book } from "../../../models/book/book.interface";
+import { Course } from "../../../models/course/course.interface";
 import { BOOKS } from "./../../../models/data-sets/book.data";
 import { COURSES } from "./../../../models/data-sets/course.data";
 

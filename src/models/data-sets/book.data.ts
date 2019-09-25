@@ -1,4 +1,4 @@
-import { Book } from "../category/book.interface";
+import { Book } from "../book/book.interface";
 
 export const BOOKS: { [key: string]: Book[] } = {
   javascript: [

@@ -1,4 +1,4 @@
-import { Course } from "./../category/course.interface";
+import { Course } from "../course/course.interface";
 
 export const COURSES: { [key: string]: Course[] } = {
   javascript: [

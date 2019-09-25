@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import Category from "../../../models/category/category.model";
+import { Course } from "../../../models/course/course.interface";
+import { Playlist } from "../../../models/playlist/playlist.model";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
 import Topic from "../../../models/topic/topic.model";
-import { Book } from "./../../../models/category/book.interface";
-import { Course } from "./../../../models/category/course.interface";
-import { Playlist } from "./../../../models/category/playlist.model";
+import { Book } from "./../../../models/book/book.interface";
 import { BOOKS } from "./../../../models/data-sets/book.data";
 import { COURSES } from "./../../../models/data-sets/course.data";
 import { VideoController } from "./../../video/v1/video.controller";

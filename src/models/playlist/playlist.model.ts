@@ -1,4 +1,4 @@
-import { PlaylistItem } from "../category/playlist-item.model";
+import { PlaylistItem } from "./playlist-item.model";
 
 export class Playlist {
   public items: PlaylistItem[];

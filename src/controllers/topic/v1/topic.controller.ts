@@ -1,8 +1,15 @@
 import { Request, Response } from "express";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
 import Topic from "../../../models/topic/topic.model";
+import { VideoController } from "./../../video/v1/video.controller";
 
 export class TopicController {
+  private videoController: VideoController;
+
+  constructor() {
+    this.videoController = new VideoController();
+  }
+
   public async getAllTopic(req: Request, res: Response): Promise<void> {
     try {
       const categories = await Topic.find();
@@ -56,7 +63,10 @@ export class TopicController {
     }
   }
 
-  public async deleteTopicByCategoryId(req: Request, res: Response): Promise<void> {
+  public async deleteTopicByCategoryId(
+    req: Request,
+    res: Response
+  ): Promise<void> {
     try {
       await Topic.deleteOne({ categoryId: req.params });
       const successfulDetete = new DeleteResponse({

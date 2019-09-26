@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Playlist } from "../../../models/playlist/playlist.model";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
 import Topic from "../../../models/topic/topic.model";
 import { VideoController } from "./../../video/v1/video.controller";
@@ -33,8 +34,14 @@ export class TopicController {
     res: Response
   ): Promise<void> {
     try {
-      const topic = await Topic.find({ categoryId: req.params });
-      res.send(topic);
+      const topics = await Topic.findOne({
+        categorySimpleId: req.params,
+        simpleId: {topicSimpleId: req.params}
+      });
+
+      topics.playlist = await this.getPlayList(topics.playlistId);
+
+      res.send(topics);
     } catch (err) {
       res.status(404).send(err);
     }
@@ -89,5 +96,11 @@ export class TopicController {
     } catch (err) {
       res.status(404).send(err);
     }
+  }
+
+  private async getPlayList(playlistId: string): Promise<Playlist> {
+    const video = await this.videoController.getPlayListById(playlistId);
+
+    return new Playlist(video);
   }
 }

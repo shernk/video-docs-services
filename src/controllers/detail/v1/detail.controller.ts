@@ -33,6 +33,34 @@ export class DetailController {
     }
   }
 
+  public async getDetailByCategoryTopic(
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    try {
+      const detail = await Detail.findOne({ categorySimpleId: req.params, topicSimpleId: req.params });
+      res.send(detail);
+    } catch (err) {
+      res.status(404).send(err);
+    }
+  }
+
+  public async getDetailByCategoryTopicDetail(
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    try {
+      const detail = await Detail.findOne({
+        categorySimpleId: req.params,
+        topicSimpleId: req.params,
+        simpleId: req.params
+      });
+      res.send(detail);
+    } catch (err) {
+      res.status(404).send(err);
+    }
+  }
+
   public async addDetail(req: Request, res: Response): Promise<void> {
     const newDetail = new Detail(req.body);
     try {

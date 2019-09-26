@@ -10,8 +10,16 @@ router.get("/:id", (req, res) => detailController.getDetailById(req, res));
 router.get("/category/:id", (req, res) =>
   detailController.getDetailByCategoryId(req, res)
 );
+router.get("/:id/category/:categorySimpleId/topics/:topicsSimpleId", (req, res) => {
+  detailController.getDetailByCategoryTopic(req, res);
+});
+router.get("/:id/category/:categorySimpleId/topics/:topicsSimpleId/details/:detailsSimpleId", (req, res) => {
+  detailController.getDetailByCategoryTopicDetail(req, res);
+});
 router.post("/", (req, res) => detailController.addDetail(req, res));
-router.delete("/:id", (req, res) => detailController.deleteDetailById(req, res));
+router.delete("/:id", (req, res) =>
+  detailController.deleteDetailById(req, res)
+);
 router.delete("/category/:id", (req, res) =>
   detailController.deleteDetailByCategoryId(req, res)
 );

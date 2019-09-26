@@ -38,7 +38,7 @@ export class DetailController {
     res: Response
   ): Promise<void> {
     try {
-      const detail = await Detail.findOne({ categorySimpleId: req.params, topicSimpleId: req.params });
+      const detail = await Detail.find({ categorySimpleId: req.params, topicSimpleId: req.params });
       res.send(detail);
     } catch (err) {
       res.status(404).send(err);

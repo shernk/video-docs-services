@@ -10,10 +10,10 @@ router.get("/:id", (req, res) => detailController.getDetailById(req, res));
 router.get("/category/:id", (req, res) =>
   detailController.getDetailByCategoryId(req, res)
 );
-router.get("/:id/category/:categorySimpleId/topics/:topicsSimpleId", (req, res) => {
+router.get("/category/:categorySimpleId/topics/:topicsSimpleId/", (req, res) => {
   detailController.getDetailByCategoryTopic(req, res);
 });
-router.get("/:id/category/:categorySimpleId/topics/:topicsSimpleId/details/:detailsSimpleId", (req, res) => {
+router.get("/:simpleId/category/:categorySimpleId/topics/:topicsSimpleId/", (req, res) => {
   detailController.getDetailByCategoryTopicDetail(req, res);
 });
 router.post("/", (req, res) => detailController.addDetail(req, res));

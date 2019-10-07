@@ -37,6 +37,9 @@ class App {
     mongoose.set("useFindAndModify", false);
     mongoose.set("useCreateIndex", true);
     mongoose.connect(this.mongoUrl);
+    mongoose.connection.once("open", () => {
+      console.log("MongoDB database connection established successfully");
+    });
   }
 
   private corsSetup(): void {
@@ -85,7 +88,9 @@ class App {
         if (apiKey === ApiKeys.Admin) {
           next();
         } else {
-          res.status(401).send(new ErrorResponse({ message: "Invalid API KEY" }));
+          res
+            .status(401)
+            .send(new ErrorResponse({ message: "Invalid API KEY" }));
         }
       }
 

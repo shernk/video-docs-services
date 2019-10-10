@@ -37,9 +37,6 @@ class App {
     mongoose.set("useFindAndModify", false);
     mongoose.set("useCreateIndex", true);
     mongoose.connect(this.mongoUrl);
-    mongoose.connection.once("open", () => {
-      console.log("MongoDB database connection established successfully");
-    });
   }
 
   private corsSetup(): void {
@@ -85,7 +82,7 @@ class App {
       if (req.method !== "GET") {
         const apiKey = req.query.key;
 
-        if (apiKey === ApiKeys.Admin) {
+        if (apiKey === ApiKeys.Youtube) {
           next();
         } else {
           res

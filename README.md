@@ -1,5 +1,2 @@
-# video-docs-services
-
-# deploy to heroku
-
-# set API_KEY
+# Bugs haven't yet
+>CastError: Cast to string failed for value "[]" at path "playlistId"

@@ -4,7 +4,7 @@ import express from "express";
 import expressRateLimit from "express-rate-limit";
 import helmet from "helmet";
 import mongoose from "mongoose";
-import { ApiKeys } from "./models/enums/api-keys.enum";
+import { ChannelID } from "./models/enums/api-keys.enum";
 import { ErrorResponse } from "./models/responses/error-res.model";
 
 class App {
@@ -41,7 +41,7 @@ class App {
 
   private corsSetup(): void {
     const allowedOrigins: string[] = [
-      "https://www.videodevdocs.com",
+      "https://www.documentation.com",
 
       /*
         * Eps30
@@ -82,7 +82,7 @@ class App {
       if (req.method !== "GET") {
         const apiKey = req.query.key;
 
-        if (apiKey === ApiKeys.Youtube) {
+        if (apiKey === ChannelID.Youtube) {
           next();
         } else {
           res

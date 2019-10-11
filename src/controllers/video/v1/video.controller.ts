@@ -1,12 +1,11 @@
-import { ApiKeys } from "./../../../models/enums/api-keys.enum";
+import { ChannelID } from "./../../../models/enums/api-keys.enum";
 
 export class VideoController {
   private base = "https://www.googleapis.com/youtube/v3";
 
   public async getPlayListById(playlistId: string) {
-    const options = `playlistItems?part=snippet&playlistId=${playlistId}&maxResults=50&key=${
-      ApiKeys.Youtube
-    }`;
+    const options = `playlist?part=snippet&channelId=${ChannelID.Youtube}&maxResults=50&key=AIzaSyCMJlO9sHx-o_-UThFPXIxIjbW42GSZeVM`;
+
     const route = `${this.base}/${options}`;
 
     try {

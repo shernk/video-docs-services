@@ -4,7 +4,7 @@ import express from "express";
 import expressRateLimit from "express-rate-limit";
 import helmet from "helmet";
 import mongoose from "mongoose";
-import { ChannelID } from "./models/enums/api-keys.enum";
+import { Credentials } from "./models/enums/api-keys.enum";
 import { ErrorResponse } from "./models/responses/error-res.model";
 
 class App {
@@ -82,7 +82,7 @@ class App {
       if (req.method !== "GET") {
         const apiKey = req.query.key;
 
-        if (apiKey === ChannelID.Youtube) {
+        if (apiKey === Credentials.ClientSecret) {
           next();
         } else {
           res

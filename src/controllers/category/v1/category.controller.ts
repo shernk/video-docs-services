@@ -99,7 +99,7 @@ export class CategoryController {
 
   private async getPlayList(playlistId: string): Promise<Playlist> {
     const video = await this.videoController.getPlayListById(playlistId);
-
+    
     return new Playlist(video);
   }
 }

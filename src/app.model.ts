@@ -37,15 +37,15 @@ class App {
     mongoose.set("useFindAndModify", false);
     mongoose.set("useCreateIndex", true);
     mongoose.connect(this.mongoUrl);
-    mongoose.connection.once("open", () => {
+    mongoose.connection.once("open", db => {
       console.log("mongoDB connected successfully");
+      return db;
     });
   }
 
   private corsSetup(): void {
     const allowedOrigins: string[] = [
-      // "https://www.documentation.com",
-      "https://www.videodevdocs.com",
+      "https://www.documentation.com",
 
       /*
         * Eps30
@@ -58,18 +58,12 @@ class App {
 
     const options = {
       origin(origin: any, callback: any) {
-        console.log("origin: " + origin);
-
         if (!origin) {
           return callback(null, true);
         }
 
-        console.log(
-          "(allowedOrigins.indexOf(origin): " + allowedOrigins.indexOf(origin)
-        );
-
         if (allowedOrigins.indexOf(origin) === -1) {
-          const msg = `The CORS policy for this site does not allow access from the specified Origin`;
+          const msg = `The CORS policy for this site DOES NOT allow access from the specified Origin`;
 
           return callback(new Error(msg), false);
         }
@@ -92,14 +86,9 @@ class App {
       if (req.method !== "GET") {
         const apiKey = req.query.key;
 
-        console.log(11111);
-
         console.log("apiKey: " + apiKey);
 
         if (apiKey === Credentials.API) {
-          console.log(2222);
-          console.log(apiKey);
-
           next();
         } else {
           res

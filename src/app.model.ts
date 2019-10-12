@@ -17,7 +17,7 @@ class App {
     this.config();
     this.mongoSetup();
     this.corsSetup();
-    this.routeGuardSetup();
+    this.routeGuardAPI();
   }
 
   private config(): void {
@@ -46,13 +46,6 @@ class App {
   private corsSetup(): void {
     const allowedOrigins: string[] = [
       "https://www.documentation.com",
-
-      /*
-        * Eps30
-        * Time: 25:30
-       ! Added localhost
-       * Fixed CORS policy: fetch at https://video-docs-service.herokuapp.com/api/v1/category from origin http://localhost: 4200
-       */
       "http://localhost:4200"
     ];
 
@@ -75,20 +68,13 @@ class App {
     this.app.use(cors(options));
   }
 
-  /*
-  * Eps30
-  * Time: 53:00
-  ! Cannot update by API_KEY
-  */
-  private routeGuardSetup(): void {
+  private routeGuardAPI(): void {
     // Get API_KEY
     this.app.use("*", (req, res, next) => {
       if (req.method !== "GET") {
-        const apiKey = req.query.key;
+        const API_KEY = req.query.key;
 
-        console.log("apiKey: " + apiKey);
-
-        if (apiKey === Credentials.API) {
+        if (API_KEY === Credentials.API) {
           next();
         } else {
           res

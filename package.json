@@ -16,7 +16,7 @@
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w",
     "watch": "nodemon -e ts -w ./src -x npm run watch:serve",
-    "watch:serve": "ts-node --inspect src/index.ts"
+    "watch:serve": "ts-node --inspect - src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -37,7 +37,7 @@
     "@types/mongodb": "^3.2.3",
     "@types/mongoose": "^5.5.12",
     "@types/node-fetch": "^2.5.1",
-    "nodemon": "^1.19.1",
+    "nodemon": "^1.19.3",
     "ts-node-dev": "^1.0.0-pre.41",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
@@ -50,6 +50,8 @@
     "helmet": "^3.21.0",
     "mongodb": "^3.3.2",
     "mongoose": "^5.6.9",
-    "node-fetch": "^2.6.0"
+    "node": "^12.11.1",
+    "node-fetch": "^2.6.0",
+    "npm": "^6.12.0"
   }
 }

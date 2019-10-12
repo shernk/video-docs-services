@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 // defines version routes
-app.use("api/v1", V1Routes);
+app.use("/api/v1", V1Routes);
 
 const port = process.env.PORT || 3000;
 

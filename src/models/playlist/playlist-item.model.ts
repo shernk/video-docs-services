@@ -1,5 +1,5 @@
 export class PlaylistItem {
-  public readonly videoId: string;
+  public readonly id: string;
   public description: string;
   public title: string;
   public thumbnailUrl: string;
@@ -15,7 +15,7 @@ export class PlaylistItem {
       ...data
     };
 
-    this.videoId = defaults.snippet.resourceId.videoId;
+    this.id = defaults.id;
     this.description = defaults.snippet.description;
     this.title = defaults.snippet.title;
     this.thumbnailUrl = defaults.snippet.thumbnailUrl.medium.url;

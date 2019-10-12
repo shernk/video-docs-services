@@ -82,7 +82,16 @@ class App {
       if (req.method !== "GET") {
         const apiKey = req.query.key;
 
-        if (apiKey === Credentials.ClientSecret) {
+        console.log(11111);
+        
+        console.log(apiKey);
+
+        if (apiKey === Credentials.API) {
+
+          console.log(2222);
+          console.log(apiKey);
+          
+          
           next();
         } else {
           res

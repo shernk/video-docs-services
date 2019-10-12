@@ -12,7 +12,6 @@ const CategorySchema = new Schema({
    ! didnt display playlist's item[{videoID, desciption, title, thumnailUrl}]
    */
   playlist: { type: Object, required: false, default: []  },
-
   playlistId: { type: String, required: true},
   description: { type: String, maxlength: 200, default: "" },
   books: { type: Array, required: false, default: [] },

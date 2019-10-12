@@ -37,6 +37,9 @@ class App {
     mongoose.set("useFindAndModify", false);
     mongoose.set("useCreateIndex", true);
     mongoose.connect(this.mongoUrl);
+    mongoose.connection.once("open", () => {
+      console.log("mongoDB connected successfully");
+    });
   }
 
   private corsSetup(): void {
@@ -55,15 +58,15 @@ class App {
 
     const options = {
       origin(origin: any, callback: any) {
-
         console.log("origin: " + origin);
 
         if (!origin) {
           return callback(null, true);
         }
 
-        console.log("(allowedOrigins.indexOf(origin): " + allowedOrigins.indexOf(origin));
-
+        console.log(
+          "(allowedOrigins.indexOf(origin): " + allowedOrigins.indexOf(origin)
+        );
 
         if (allowedOrigins.indexOf(origin) === -1) {
           const msg = `The CORS policy for this site does not allow access from the specified Origin`;
@@ -90,15 +93,13 @@ class App {
         const apiKey = req.query.key;
 
         console.log(11111);
-        
+
         console.log("apiKey: " + apiKey);
 
         if (apiKey === Credentials.API) {
-
           console.log(2222);
           console.log(apiKey);
-          
-          
+
           next();
         } else {
           res

@@ -41,7 +41,8 @@ class App {
 
   private corsSetup(): void {
     const allowedOrigins: string[] = [
-      "https://www.documentation.com",
+      // "https://www.documentation.com",
+      "https://www.videodevdocs.com",
 
       /*
         * Eps30
@@ -54,9 +55,15 @@ class App {
 
     const options = {
       origin(origin: any, callback: any) {
+
+        console.log("origin: " + origin);
+
         if (!origin) {
           return callback(null, true);
         }
+
+        console.log("(allowedOrigins.indexOf(origin): " + allowedOrigins.indexOf(origin));
+
 
         if (allowedOrigins.indexOf(origin) === -1) {
           const msg = `The CORS policy for this site does not allow access from the specified Origin`;
@@ -84,7 +91,7 @@ class App {
 
         console.log(11111);
         
-        console.log(apiKey);
+        console.log("apiKey: " + apiKey);
 
         if (apiKey === Credentials.API) {
 

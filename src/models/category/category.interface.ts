@@ -5,11 +5,11 @@ import { Playlist } from '../playlist/playlist.model';
 import { ITopic } from "../topic/topic.interface";
 
 export interface ICategory extends mongoose.Document {
-  description: string;
-  label: string;
   simpleId: string;
+  label: string;
+  description: string;
   playlistId: string;
-  playlist?: Playlist;
+  playlist: Playlist;
   books: Book[];
   courses: Course[];
   topics: ITopic[];

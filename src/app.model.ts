@@ -33,14 +33,14 @@ class App {
 
   private mongoSetup(): void {
     (mongoose as any).Promise = global.Promise;
-    mongoose.set("useNewUrlParser", true);
-    mongoose.set("useFindAndModify", false);
-    mongoose.set("useCreateIndex", true);
-    mongoose.connect(this.mongoUrl);
-    mongoose.connection.once("open", db => {
-      console.log("mongoDB connected successfully");
-      return db;
-    });
+    mongoose
+      .connect(this.mongoUrl, {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+      })
+      .then(() => console.log("MongoDB Connected..." + this.mongoUrl))
+      .catch(err => console.log(err));
   }
 
   private corsSetup(): void {
@@ -59,9 +59,9 @@ class App {
           const msg = `The CORS policy for this site DOES NOT allow access from the specified Origin`;
 
           return callback(new Error(msg), false);
+        } else {
+          return callback(null, true);
         }
-
-        return callback(null, true);
       }
     };
 
@@ -81,9 +81,9 @@ class App {
             .status(401)
             .send(new ErrorResponse({ message: "Invalid API KEY" }));
         }
+      } else {
+        next();
       }
-
-      next();
     });
   }
 }

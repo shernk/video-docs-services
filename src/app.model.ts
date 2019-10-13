@@ -10,7 +10,9 @@ import { ErrorResponse } from "./models/responses/error-res.model";
 class App {
   public app: express.Application;
   public mongoUrl: string =
-    process.env.MONGODB_URI || "mongodb://localhost/admin";
+    "mongodb+srv://sherlock:sherlock123@cluster0-jceqk.mongodb.net/test?retryWrites=true&w=majority" ||
+    // process.env.MONGODB_URI;
+    "mongodb://localhost/admin";
 
   constructor() {
     this.app = express();
@@ -39,8 +41,14 @@ class App {
         useCreateIndex: true,
         useUnifiedTopology: true
       })
-      .then(() => console.log("MongoDB Connected..." + this.mongoUrl))
-      .catch(err => console.log(err));
+      .then(() =>
+        mongoose.connection.once("open", () => {
+          console.log("MongoDB database connection established successfully");
+        })
+      )
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   private corsSetup(): void {
@@ -75,7 +83,18 @@ class App {
         const API_KEY = req.query.key;
 
         if (API_KEY === Credentials.API) {
-          next();
+          try {
+            next();
+          } catch (error) {
+            res
+              .status(404)
+              .send(
+                new ErrorResponse({
+                  message:
+                    "cannot set headers after they are sent to the client"
+                })
+              );
+          }
         } else {
           res
             .status(401)

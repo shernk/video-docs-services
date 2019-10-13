@@ -14,6 +14,8 @@ router.post("/", (req, res) => categoryController.addCategory(req, res));
 router.put("/:id", (req, res) =>
   categoryController.updateCategoryById(req, res)
 );
-router.delete("/:id", (req, res) => categoryController.deleteCategory(req, res));
+router.delete("/:id", (req, res) =>
+  categoryController.deleteCategory(req, res)
+);
 
 export default router;

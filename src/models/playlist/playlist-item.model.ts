@@ -10,12 +10,12 @@ export class PlaylistItem {
       description: "",
       thumbnailUrl: "",
       title: "",
-      snippet: { resourceId: {}, thumnails: { medium: {} } },
+      snippet: { thumnails: { medium: {} } },
 
       ...data
     };
 
-    this.videoId = defaults.snippet.resourceId.videoId;
+    this.videoId = defaults.snippet.videoId;
     this.description = defaults.snippet.description;
     this.title = defaults.snippet.title;
     this.thumbnailUrl = defaults.snippet.thumbnailUrl.medium.url;

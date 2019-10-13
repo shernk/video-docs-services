@@ -22,7 +22,7 @@ export class TopicController {
 
   public async getTopicById(req: Request, res: Response): Promise<void> {
     try {
-      const topic = await Topic.findById(req.params);
+      const topic = await Topic.findById(req.param("id"));
       res.send(topic);
     } catch (err) {
       res.status(404).send(err);
@@ -35,8 +35,8 @@ export class TopicController {
   ): Promise<void> {
     try {
       const topics = await Topic.findOne({
-        categorySimpleId: req.params,
-        simpleId: {topicSimpleId: req.params}
+        categorySimpleId: req.param('id'),
+        // simpleId: {topicSimpleId: req.param('simpleId')}
       });
 
       topics.playlist = await this.getPlayList(topics.playlistId);
@@ -87,9 +87,10 @@ export class TopicController {
   }
 
   public async updateTopicById(req: Request, res: Response): Promise<void> {
-    const { params, body } = req;
+    const { body } = req;
+    const param = req.param('id');
     try {
-      const topic = await Topic.findByIdAndUpdate(params, body, {
+      const topic = await Topic.findByIdAndUpdate(param, body, {
         new: true
       });
       res.send(topic);

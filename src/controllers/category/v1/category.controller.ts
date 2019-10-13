@@ -42,7 +42,7 @@ export class CategoryController {
 
   public async getCategoryById(req: Request, res: Response): Promise<void> {
     try {
-      const category = await Category.findOne({ simpleId: req.params });
+      const category = await Category.findOne({ simpleId: req.param("id") });
 
       category.playlist = await this.getPlayList(category.playlistId);
       category.books = this.getBooks(category.simpleId);
@@ -78,11 +78,13 @@ export class CategoryController {
   }
 
   public async updateCategoryById(req: Request, res: Response): Promise<void> {
-    const { params, body } = req;
+    const body = req.body;
+    const param = req.param("id");
     try {
-      const category = await Category.findByIdAndUpdate(params, body, {
+      const category = await Category.findByIdAndUpdate(param, body, {
         new: true
       });
+
       res.send(category);
     } catch (err) {
       res.status(404).send(err);
@@ -99,7 +101,7 @@ export class CategoryController {
 
   private async getPlayList(playlistId: string): Promise<Playlist> {
     const video = await this.videoController.getPlayListById(playlistId);
-    
+
     return new Playlist(video);
   }
 }

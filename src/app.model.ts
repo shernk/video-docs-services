@@ -10,7 +10,8 @@ import { ErrorResponse } from "./models/responses/error-res.model";
 class App {
   public app: express.Application;
   public MONGO_URI: string =
-    process.env.MONGO_URI || "mongodb://localhost/admin";
+    "mongodb+srv://sherlock:sherlock123@cluster0-jceqk.mongodb.net/test?retryWrites=true&w=majority";
+  // process.env.MONGO_URI || "mongodb://localhost/admin";
 
   constructor() {
     this.app = express();
@@ -37,10 +38,11 @@ class App {
       .connect(this.MONGO_URI, {
         useNewUrlParser: true,
         useCreateIndex: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
       })
       .then(() =>
-        mongoose.connection.once("open", () => {
+        mongoose.connection.on("open", () => {
           console.log("MongoDB database connection established successfully");
         })
       )

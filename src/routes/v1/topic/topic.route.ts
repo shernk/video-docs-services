@@ -9,7 +9,7 @@ router.get("/", (req, res) => topicController.getAllTopic(req, res));
 router.get("/:id", (req, res) => topicController.getTopicById(req, res));
 router.get("/category/:id", (req, res) =>
   topicController.getTopicByCategoryId(req, res)
-);
+); 
 router.post("/", (req, res) => topicController.addTopic(req, res));
 router.delete("/:id", (req, res) => topicController.deleteTopicById(req, res));
 router.delete("/category/:id", (req, res) =>

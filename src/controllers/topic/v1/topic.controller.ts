@@ -35,8 +35,8 @@ export class TopicController {
   ): Promise<void> {
     try {
       const topics = await Topic.findOne({
-        categorySimpleId: req.param('id'),
-        // simpleId: {topicSimpleId: req.param('simpleId')}
+        categorySimpleId: req.param("id")
+        // simpleId: {topicsSimpleId: req.param('simpleId')}
       });
 
       topics.playlist = await this.getPlayList(topics.playlistId);
@@ -88,11 +88,16 @@ export class TopicController {
 
   public async updateTopicById(req: Request, res: Response): Promise<void> {
     const { body } = req;
-    const param = req.param('id');
+    const param = req.param("id");
+
+    // const {params, body} = req;
     try {
       const topic = await Topic.findByIdAndUpdate(param, body, {
         new: true
       });
+      // .populate("playlist", "items")
+      // .exec((err, items) => console.log("Poplated playlist " + items));
+
       res.send(topic);
     } catch (err) {
       res.status(404).send(err);

@@ -5,8 +5,8 @@ import { DeleteResponse } from "../../../models/responses/delete-res.model";
 export class DetailController {
   public async getAllDetail(req: Request, res: Response): Promise<void> {
     try {
-      const categories = await Detail.find();
-      res.send(categories);
+      const detail = await Detail.find();
+      res.send(detail);
     } catch (err) {
       res.send(err);
     }
@@ -14,7 +14,7 @@ export class DetailController {
 
   public async getDetailById(req: Request, res: Response): Promise<void> {
     try {
-      const detail = await Detail.findOne({ simpleId: req.params });
+      const detail = await Detail.findOne({ _id: req.param("_id") });
       res.send(detail);
     } catch (err) {
       res.status(404).send(err);
@@ -26,7 +26,7 @@ export class DetailController {
     res: Response
   ): Promise<void> {
     try {
-      const detail = await Detail.find({ categoryId: req.params });
+      const detail = await Detail.find({ categoryId: req.param("_id") });
       res.send(detail);
     } catch (err) {
       res.status(404).send(err);
@@ -38,7 +38,10 @@ export class DetailController {
     res: Response
   ): Promise<void> {
     try {
-      const detail = await Detail.find({ categorySimpleId: req.params, topicSimpleId: req.params });
+      const detail = await Detail.find({
+        categorySimpleId: req.param("simpleId"),
+        topicsSimpleId: req.param("simpleId")
+      });
       res.send(detail);
     } catch (err) {
       res.status(404).send(err);
@@ -51,9 +54,9 @@ export class DetailController {
   ): Promise<void> {
     try {
       const detail = await Detail.findOne({
-        categorySimpleId: req.params,
-        topicSimpleId: req.params,
-        simpleId: req.params
+        simpleId: req.param("simpleId"),
+        categorySimpleId: req.param("categorySimpleId"),
+        topicsSimpleId: req.param("topicsSimpleId")
       });
       res.send(detail);
     } catch (err) {
@@ -89,7 +92,7 @@ export class DetailController {
     res: Response
   ): Promise<void> {
     try {
-      await Detail.deleteOne({ categoryId: req.params });
+      await Detail.deleteOne({ categoryId: req.param("_id") });
       const successfulDetete = new DeleteResponse({
         message: `Successfully Deleted Detail`,
         status: 200
@@ -101,9 +104,10 @@ export class DetailController {
   }
 
   public async updateDetailById(req: Request, res: Response): Promise<void> {
-    const { params, body } = req;
+    const { body } = req;
+    const param = req.param("_id");
     try {
-      const detail = await Detail.findByIdAndUpdate(params, body, {
+      const detail = await Detail.findByIdAndUpdate(param, body, {
         new: true
       });
       res.send(detail);

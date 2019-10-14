@@ -19,6 +19,7 @@ export class CategoryController {
   public async getAllCategories(req: Request, res: Response): Promise<void> {
     try {
       const categories = await Category.find();
+      
       res.send(categories);
     } catch (err) {
       res.send(err);

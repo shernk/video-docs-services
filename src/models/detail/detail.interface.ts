@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export interface IDetail extends mongoose.Document {
   categorySimpleId: string;
-  topicSimpleId: string;
+  topicsSimpleId: string;
   videoId: string;
   simpleId: string;
   description: string;

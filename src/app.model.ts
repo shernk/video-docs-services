@@ -9,10 +9,8 @@ import { ErrorResponse } from "./models/responses/error-res.model";
 
 class App {
   public app: express.Application;
-  public mongoUrl: string =
-    "mongodb+srv://sherlock:sherlock123@cluster0-jceqk.mongodb.net/test?retryWrites=true&w=majority" ||
-    // process.env.MONGODB_URI;
-    "mongodb://localhost/admin";
+  public MONGO_URI: string =
+    process.env.MONGO_URI || "mongodb://localhost/admin";
 
   constructor() {
     this.app = express();
@@ -36,7 +34,7 @@ class App {
   private mongoSetup(): void {
     (mongoose as any).Promise = global.Promise;
     mongoose
-      .connect(this.mongoUrl, {
+      .connect(this.MONGO_URI, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true
@@ -86,14 +84,11 @@ class App {
           try {
             next();
           } catch (error) {
-            res
-              .status(404)
-              .send(
-                new ErrorResponse({
-                  message:
-                    "cannot set headers after they are sent to the client"
-                })
-              );
+            res.status(404).send(
+              new ErrorResponse({
+                message: "cannot set headers after they are sent to the client"
+              })
+            );
           }
         } else {
           res

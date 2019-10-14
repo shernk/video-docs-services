@@ -1,4 +1,4 @@
-export class PlaylistItem {
+export class PlaylistItem  {
   public readonly videoId: string;
   public description: string;
   public title: string;

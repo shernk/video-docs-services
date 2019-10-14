@@ -18,8 +18,10 @@ export class CategoryController {
 
   public async getAllCategories(req: Request, res: Response): Promise<void> {
     try {
-      const categories = await Category.find();
-      
+      const categories = await Category.find({})
+        .populate({ path: "topics", model: "Topic" })
+        .exec();
+
       res.send(categories);
     } catch (err) {
       res.send(err);

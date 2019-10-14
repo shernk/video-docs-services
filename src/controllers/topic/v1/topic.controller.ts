@@ -13,8 +13,16 @@ export class TopicController {
 
   public async getAllTopic(req: Request, res: Response): Promise<void> {
     try {
-      const categories = await Topic.find();
-      res.send(categories);
+      const topics = await Topic.find()
+        .populate({ path: "playlist", model: "Items" })
+        .exec((err, playlist) => {
+          if (err) {
+            console.log("This is getAllTopic + ", err);
+          }
+          console.log(playlist);
+        });
+
+      res.send(topics);
     } catch (err) {
       res.send(err);
     }
@@ -89,14 +97,12 @@ export class TopicController {
   public async updateTopicById(req: Request, res: Response): Promise<void> {
     const { body } = req;
     const param = req.param("id");
-
-    // const {params, body} = req;
     try {
       const topic = await Topic.findByIdAndUpdate(param, body, {
         new: true
-      });
-      // .populate("playlist", "items")
-      // .exec((err, items) => console.log("Poplated playlist " + items));
+      })
+        .populate({ path: "playlist", model: "Items" })
+        .exec((err, items) => console.log("Populated playlist " + items));
 
       res.send(topic);
     } catch (err) {

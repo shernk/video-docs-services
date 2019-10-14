@@ -4,7 +4,7 @@ export class VideoController {
   private base = "https://www.googleapis.com/youtube/v3";
 
   public async getPlayListById(playlistId: string) {
-    const options = `playlists?part=snippet&channelId=${Credentials.ChannelId}&maxResults=50&key=${Credentials.API}`;
+    const options = `playlistItems?part=snippet&playlistId=${Credentials.playlistId}&maxResults=50&key=${Credentials.API}`;
 
     const route = `${this.base}/${options}`;
 

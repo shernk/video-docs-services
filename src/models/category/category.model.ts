@@ -9,7 +9,7 @@ const CategorySchema = new Schema({
   playlistId: { type: String, required: false },
   books: { type: Array, required: true, default: [] },
   courses: { type: Array, required: true, default: [] },
-  topics: [{ type: Schema.Types.ObjectId, ref: "Topic", required: true, default: [] }]
+  topics: { type: Object, ref: "Topic", required: true, default: [] }
 });
 
 export default model<ICategory>("Category", CategorySchema);

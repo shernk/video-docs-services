@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Playlist } from "../../../models/playlist/playlist.model";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
 import Topic from "../../../models/topic/topic.model";
+import topicModel from "./../../../models/topic/topic.model";
 import { VideoController } from "./../../video/v1/video.controller";
 
 export class TopicController {
@@ -13,14 +14,10 @@ export class TopicController {
 
   public async getAllTopic(req: Request, res: Response): Promise<void> {
     try {
-      const topics = await Topic.find()
-        .populate({ path: "playlist", model: "Items" })
-        .exec((err, playlist) => {
-          if (err) {
-            console.log("This is getAllTopic err ", err);
-          }
-          console.log(playlist);
-        });
+      const topics = await Topic.find();
+        // ! cannot populate the playlist's data
+        // .populate("playlist")
+        // .exec();
 
       res.send(topics);
     } catch (err) {

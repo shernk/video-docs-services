@@ -5,10 +5,10 @@ import { Playlist } from "../../../models/playlist/playlist.model";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
 import Topic from "../../../models/topic/topic.model";
 import { Book } from "./../../../models/book/book.interface";
+import categoryModel from "./../../../models/category/category.model";
 import { BOOKS } from "./../../../models/data-sets/book.data";
 import { COURSES } from "./../../../models/data-sets/course.data";
 import { VideoController } from "./../../video/v1/video.controller";
-
 export class CategoryController {
   private videoController = new VideoController();
 
@@ -18,15 +18,20 @@ export class CategoryController {
 
   public async getAllCategories(req: Request, res: Response): Promise<void> {
     try {
-      const categories = await Category.find()
-        .populate({ path: "topics", model: "Topic" })
+      const categories = await Category.find();
+        // !Bug: cannot populate the topic's  data
+        // .populate("topics", categoryModel, "Topic")
+        // .exec();
+      /* 
+         ! when execute these code the data has just showed in console but not in database
         .exec((err, topics) => {
-          if (err) {
-            console.log("This is a getAllCategories error" + err);
-          }
-          console.log(topics);
-          
-        });
+        if (err) {
+          console.log("This is a getAllCategories error" + err);
+        }
+        console.log(topics);
+
+        }); 
+      */
 
       res.send(categories);
     } catch (err) {

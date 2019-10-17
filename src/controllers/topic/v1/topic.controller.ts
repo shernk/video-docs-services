@@ -17,7 +17,7 @@ export class TopicController {
         .populate({ path: "playlist", model: "Items" })
         .exec((err, playlist) => {
           if (err) {
-            console.log("This is getAllTopic + ", err);
+            console.log("This is getAllTopic err ", err);
           }
           console.log(playlist);
         });

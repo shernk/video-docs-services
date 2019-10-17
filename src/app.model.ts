@@ -53,7 +53,7 @@ class App {
 
   private corsSetup(): void {
     const allowedOrigins: string[] = [
-      "https://www.documentation.com",
+      "https://www.videodevdocs.com",
       "http://localhost:4200"
     ];
 

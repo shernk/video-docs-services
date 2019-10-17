@@ -3,7 +3,7 @@ import V1Routes from "./routes/v1/v1.route";
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Origin", "https://www.documentation.com");
+  // res.header("Access-Control-Allow-Origin", "https://www.documentation.com");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"

@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { Playlist } from "../../../models/playlist/playlist.model";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
 import Topic from "../../../models/topic/topic.model";
-import topicModel from "./../../../models/topic/topic.model";
 import { VideoController } from "./../../video/v1/video.controller";
 
 export class TopicController {

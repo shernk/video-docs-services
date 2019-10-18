@@ -1,2 +1,7 @@
 #create database for books and course
-#error CORS didnt show from the server
+
+#fix bug controller
+
+#deploy heroku
+
+#populate database

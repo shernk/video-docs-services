@@ -5,7 +5,6 @@ import { Playlist } from "../../../models/playlist/playlist.model";
 import { DeleteResponse } from "../../../models/responses/delete-res.model";
 import Topic from "../../../models/topic/topic.model";
 import { Book } from "./../../../models/book/book.interface";
-import categoryModel from "./../../../models/category/category.model";
 import { BOOKS } from "./../../../models/data-sets/book.data";
 import { COURSES } from "./../../../models/data-sets/course.data";
 import { VideoController } from "./../../video/v1/video.controller";

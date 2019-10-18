@@ -1,0 +1,1 @@
+{"version":3,"file":"delete-res.model.js","sourceRoot":"","sources":["../../../src/models/delete/delete-res.model.ts"],"names":[],"mappings":";;AAAA,MAAa,cAAc;IAIzB,YAAY,IAAU;QACpB,MAAM,QAAQ,mBACZ,OAAO,EAAE,EAAE,EACX,MAAM,EAAE,GAAG,IAER,IAAI,CACR,CAAC;QAEF,IAAI,CAAC,OAAO,GAAG,QAAQ,CAAC,OAAO,CAAC;QAChC,IAAI,CAAC,MAAM,GAAG,QAAQ,CAAC,MAAM,CAAC;IAChC,CAAC;CACF;AAfD,wCAeC"}

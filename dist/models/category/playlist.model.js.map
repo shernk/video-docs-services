@@ -1,0 +1,1 @@
+{"version":3,"file":"playlist.model.js","sourceRoot":"","sources":["../../../src/models/category/playlist.model.ts"],"names":[],"mappings":";;AAEA,MAAa,QAAQ;IAGnB,YAAY,IAAU;QACpB,MAAM,QAAQ,mBACZ,KAAK,EAAE,EAAE,IAEN,IAAI,CACR,CAAC;QAEF,IAAI,CAAC,KAAK,GAAG,QAAQ,CAAC,KAAK,CAAC,GAAG,CAC7B,CAAC,YAAiB,EAAE,EAAE,CAAC,IAAI,YAAY,CAAC,YAAY,CAAC,CACtD,CAAC;IACJ,CAAC;CACF;AAdD,4BAcC"}

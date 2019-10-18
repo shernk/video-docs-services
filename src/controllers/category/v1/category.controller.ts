@@ -22,7 +22,7 @@ export class CategoryController {
         // .populate("topics", categoryModel, "Topic")
         // .exec();
       /* 
-         ! when execute these code the data has just showed in console but not in database
+         ! when execute these code the data have just showed in console but not in database
         .exec((err, topics) => {
         if (err) {
           console.log("This is a getAllCategories error" + err);
